@@ -67,10 +67,11 @@
   },
   "dependencies": {
     "@expo/react-native-action-sheet": "^2.0.1",
+    "expo-av": "^4.0.0",
     "moment": "^2.19.0",
     "react-native-communications": "2.2.1",
     "react-native-lightbox": "^0.7.0",
-    "react-native-parsed-text": "^0.0.20",
+    "react-native-parsed-text": "git+ssh://git@github.com/EvanBacon/react-native-parsed-text.git",
     "react-native-video": "^3.2.1",
     "uuid": "3.3.0"
   },

@@ -1,8 +1,11 @@
-import { Permissions, Location, ImagePicker, Linking } from 'expo';
+import { Permissions, Constants, Location, ImagePicker, Linking } from 'expo';
 
-import { Alert } from 'react-native';
+import { Alert, Platform } from 'react-native';
 
 export default async function getPermissionAsync(permission) {
+  if (Platform.OS === 'web') {
+    return true;
+  }
   const { status } = await Permissions.askAsync(permission);
   if (status !== 'granted') {
     const { name } = Constants.manifest;

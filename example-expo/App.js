@@ -93,7 +93,7 @@ export default class App extends Component {
       .find(findStep(step));
     if (newMessage) {
       this.setState((previousState) => ({
-        messages: GiftedChat.append(previousState.messages, newMessage),
+        messages: GiftedChat.append(previousState.messages, {...newMessage, _id: Math.round(Math.random() * 1000) + '-bot' }),
       }));
     }
   };

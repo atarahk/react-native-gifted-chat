@@ -9,15 +9,18 @@
     "cleaning": "watchman watch-del-all && rm -f yarn.lock && rm -rf node_modules && rm -rf $TMPDIR/react-* && yarn cache clean"
   },
   "dependencies": {
-    "expo": "^32.0.0",
+    "expo": "^33.0.0-alpha.web.1",
     "react": "16.5.0",
+    "react-dom": "^16.8.4",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-native-gifted-chat": "FaridSafi/react-native-gifted-chat",
     "react-native-nav": "2.0.2",
+    "react-native-web": "^0.11.1",
     "sentry-expo": "1.7.0"
   },
   "devDependencies": {
     "appr": "xcarpentier/appr",
+    "babel-preset-expo": "^5.1.1",
     "detox": "7.0.0-alpha.1",
     "detox-expo-helpers": "0.2.0",
     "jest": "22.1.4"

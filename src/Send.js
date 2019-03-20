@@ -2,28 +2,60 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, ViewPropTypes } from 'react-native';
+import { Platform, StyleSheet, Text, TouchableOpacity, View, ViewPropTypes } from 'react-native';
 import Color from './Color';
 
-export default function Send({ text, containerStyle, onSend, children, textStyle, label, alwaysShowSend, disabled }) {
-  if (alwaysShowSend || text.trim().length > 0) {
-    return (
-      <TouchableOpacity
-        testID="send"
-        accessible
-        accessibilityLabel="send"
-        style={[styles.container, containerStyle]}
-        onPress={() => {
-          onSend({ text: text.trim() }, true);
-        }}
-        accessibilityTraits="button"
-        disabled={disabled}
-      >
-        <View>{children || <Text style={[styles.text, textStyle]}>{label}</Text>}</View>
-      </TouchableOpacity>
-    );
+const isWeb = Platform.OS === 'web';
+
+const submitKeys = [13, 38, 40];
+
+export default class Send extends React.Component {
+
+  componentDidMount() {
+    if (isWeb) {
+      window.addEventListener('keyup', this.onKeyUp, false);
+    }
   }
-  return <View />;
+
+  componentWillUnmount() {
+    if (isWeb) {
+      window.removeEventListener('keyup', this.onKeyUp);
+    }
+  }
+
+  onKeyUp = (e) => {
+    if (submitKeys.includes(e.keyCode)) {
+      const { text, alwaysShowSend, onSend } = this.props;
+      if (alwaysShowSend || text.trim().length > 0) {
+        onSend({ text: text.trim() }, true);
+      }
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  };
+
+  render() {
+    const { text, containerStyle, onSend, children, textStyle, label, alwaysShowSend, disabled } = this.props;
+    if (alwaysShowSend || text.trim().length > 0) {
+      return (
+        <TouchableOpacity
+          testID="send"
+          accessible
+          accessibilityLabel="send"
+          style={[styles.container, containerStyle]}
+          onPress={() => {
+            onSend({ text: text.trim() }, true);
+          }}
+          accessibilityTraits="button"
+          disabled={disabled}
+        >
+          <View>{children || <Text style={[styles.text, textStyle]}>{label}</Text>}</View>
+        </TouchableOpacity>
+      );
+    }
+    return <View />;
+  }
+
 }
 
 const styles = StyleSheet.create({

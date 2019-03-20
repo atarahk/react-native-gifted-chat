@@ -520,7 +520,7 @@ GiftedChat.defaultProps = {
   timeFormat: TIME_FORMAT,
   dateFormat: DATE_FORMAT,
   isAnimated: Platform.select({
-    ios: true,
+    default: true,
     android: false,
   }),
   loadEarlier: false,
